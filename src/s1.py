@@ -13,7 +13,8 @@ s.listen(5)                 # Now wait for client connection.
 while True:
 	c, addr = s.accept()     # Establish connection with client.
 	message = re.findall(r'\b\d+\b', str(c.recv(1024),'UTF-8'))
-	itemUser = message[0] + ':' + message[1]
+	itemUser = message[0] + ':' + message[1] + ':' + message[2]
+	print(itemUser)
 	r1.lpush('qiu', itemUser) 
 	#print (itemUser)
 	#print (message[0])

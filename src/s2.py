@@ -18,24 +18,25 @@ while True:
 		pair = str(r1.lpop('qiu'), "utf-8")
 		
 		#Parse item and user names
-		pairReg = re.match(r'(.*):(.*)', pair, re.M|re.I)
+		pairReg = re.match(r'(.*):(.*):(.*)', pair, re.M|re.I)
 
 		item = pairReg.group(1)
 		user = pairReg.group(2)
+		rating = pairReg.group(3)
 		#print(item)
 		#print(user)
 		#test purposesbreak
 		#Add 'user' to 'item''s set in r2
-		r2.sadd(item,user)
+		r2.hset(item,user,rating)
 		#Check in all items for 'user'
 		for item2 in r2.scan_iter():
 			if(str(item2, "utf-8") != item):
 				#print('key')
-				#print(str(key, "utf-8"))
+				print(str(item2, "utf-8"))
 
 				#If 'user' is a member of 'item2's user set
 				#push item:item2 into r3's queue
-				if(r2.sismember(str(item2, "utf-8"), user) == 1):
+				if(r2.hexists(str(item2, "utf-8"), user) == 1):
 					itemitem = item + ':' + str(item2, "utf-8")
 					
 					r3.lpush('qii', itemitem)

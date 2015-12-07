@@ -8,7 +8,8 @@ with open('../data/new.csv') as csvread:
 	for row in reader:
 		uId = row['userId']
 		mId = row['movieId']
-		getStr = 'HTTP GET /item/:'+mId+'/user/:'+uId
+		mRate = row['rating']
+		getStr = 'HTTP GET /item/:'+mId+'/user/:'+uId+'/rat/:'+mRate
 		s = socket.socket()         # Create a socket object
 		host = 'localhost' 	  # Get local machine name
 		port = 8080               # Reserve a port for your service.
