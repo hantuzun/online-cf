@@ -23,23 +23,19 @@ while True:
 		item = pairReg.group(1)
 		user = pairReg.group(2)
 		rating = pairReg.group(3)
+		if r2.exists(user) != 1:
+			r2.incr('userCount')
 		#print(item)
 		#print(user)
 		#test purposesbreak
 		#Add 'user' to 'item''s set in r2
 		r2.hset(item,user,rating)
+		r2.sadd(user, item)
 		#Check in all items for 'user'
-		for item2 in r2.scan_iter():
-			if(str(item2, "utf-8") != item):
-				#print('key')
-				print(str(item2, "utf-8"))
-
-				#If 'user' is a member of 'item2's user set
-				#push item:item2 into r3's queue
-				if(r2.hexists(str(item2, "utf-8"), user) == 1):
-					itemitem = item + ':' + str(item2, "utf-8")
-					
-					r3.lpush('qii', itemitem)
-					#test purposes r3.lrange('qii', 0, -1)
-				#test purposes time.sleep(2)
-		
+		members = r2.smembers(user)
+		while len(members) != 0:
+			citem = (str(members.pop(), 'utf-8'))
+			if citem != item:
+				itemUser = item + ':' + citem
+				print(itemUser)
+				r3.lpush('qii', itemUser)		
