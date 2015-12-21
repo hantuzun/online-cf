@@ -45,6 +45,13 @@ while True:
 			sim = interCount / unionCount
 		else:
 			sim = 0
+		if r3.zcard(item1) > 30:
+			print(r3.zremrangebyrank(item1,0,30))
+		if r3.zcard(item2) > 30:
+			print(r3.zremrangebyrank(item2,0,30))
 
 		r3.zadd(item1, sim, item2)
 		r3.zadd(item2, sim, item1)				
+	else:
+		print("Waiting...")
+		time.sleep(2)
