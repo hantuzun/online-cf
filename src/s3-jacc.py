@@ -39,7 +39,7 @@ while True:
 		for key in keys2:
 			
 			if r2.hexists(item1,key) != 1:
-				interCount += 1
+				#interCount += 1
 				unionCount += 1
 		if unionCount !=0:
 			sim = interCount / unionCount
