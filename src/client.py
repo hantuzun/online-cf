@@ -16,4 +16,4 @@ with open('../data/new.csv') as csvread:
 		s.connect((host, port))
 		s.send(bytearray(getStr,'UTF-8'))
 		s.close     		 # Close the socket when done
-		#time.sleep(1)
+		time.sleep(0.3)
