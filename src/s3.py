@@ -40,7 +40,7 @@ while True:
 		for key in keys2:
 			denom2 += int(str(r2.hget(item2, key), 'utf-8'))**2
 			if r2.hexists(item1,key) != 1:
-				numerator += r2.hget(item2, key)*3
+				numerator += int(str(r2.hget(item2, key),'utf-8'))*3
 				unionCount += 1
 		missingCount1 = int(str(r2.get('userCount'),'utf-8')) - r2.hlen(item1)
 		missingCount2 = int(str(r2.get('userCount'), 'utf-8')) - r2.hlen(item2)
