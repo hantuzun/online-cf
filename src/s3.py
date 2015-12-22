@@ -4,7 +4,6 @@ import redis
 import re
 import time
 
-#r1 = redis.StrictRedis(host='localhost', port=6379, db=0)
 r2 = redis.StrictRedis(host='localhost', port=6380, db=0)
 r3 = redis.StrictRedis(host='localhost', port=6381, db=0)
 
@@ -27,8 +26,9 @@ while True:
                 unionCount += 1
             else:
                 unionCount += 1
+
         for key in keys2:
-            if r2.hexists(item1,key) != 1:
+            if r2.hexists(item1, key) != 1:
                 unionCount += 1
 
         if unionCount !=0:
@@ -43,12 +43,11 @@ while True:
 
         maxSize = 2;
 
+        # Remove least similar items if similar item set size is larger than maxSize
         for item in [item1, item2]:
             size = r3.zcard(item)
             removeCount = size - maxSize
             if removeCount > 0:
                 r3.zremrangebyrank(item, 0, removeCount - 1)
-
     else:
-        print ('Waiting...')
-        time.sleep(2)
+        time.sleep(1)
