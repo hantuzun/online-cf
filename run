@@ -1,0 +1,13 @@
+#!/bin/bash
+
+python3 src/s1.py &
+python3 src/s2.py &
+python3 src/s3.py &
+
+# wait
+cat
+
+# kill the scripts on exit with CTRL-D
+trap 'kill $(jobs -pr)' SIGINT SIGTERM EXIT
+trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
+trap 'kill $(jobs -p)' EXIT
