@@ -33,7 +33,7 @@ while True:
             commonItem = commonItems.pop().decode("utf-8")
             if commonItem != item:
                 itemPair = item + ':' + commonItem
-                print(itemPair)
+                print('Calculate the similarity of', item, commonItem, 'pair')
                 r3.lpush('qii', itemPair)
     else:
         time.sleep(1)

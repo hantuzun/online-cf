@@ -36,7 +36,7 @@ while True:
         else:
             sim = 0
 
-        print ('similarity of ', item1, ' and ', item2, ' is ', sim)
+        print ('similarity of', item1, 'and', item2, 'is', sim)
 
         r3.zadd(item1, sim, item2)
         r3.zadd(item2, sim, item1)
