@@ -1,12 +1,20 @@
 # online-cf
 Real-time collaborative filtering for item-item similarities
 
-LATEST ISSUES:
+## Build Instructions 
 
--NOT SURE ABOUT THE COSINE SIMILARITY CALCULATION. IT NEEDS TESTING WITH A SMALLER AND MORE CONTROLLABLE DATASET
+Scripts are written in Python 3.
 
--YOU MUST INSTALL AND CONFIGURE REDIS ON YOUR LOCALS ASAP!!! FEEL FREE WITH CHANGING THE PORTS ON EACH SCRIPT
+```sh
+pip3 install redis
+```
 
--THE TEST RUN IS LIKE THIS: FIRE UP s1.py, client.py, s2.py and s3.py in order for best tests
+## Latest Issues
 
--S2.PY FAILS AT SOME POINT BECAUSE OF SOMETHING RELATED WITH REDIS FUNCTIONS SADD AND HSET (I THINK IT'S A MINOR ISSUE)
+ - Not sure about the cosine similarity calculation. it needs testing with a smaller and more controllable dataset.
+
+ - You must install and configure redis on your locals. Feel free with changing the ports on each script.
+
+ - The test run is like this: fire up s1.py, client.py, s2.py and s3.py in order for best tests.
+
+ - s2.py fails at some point because of something related with redis functions sadd and hset (I think it's a minor issue).
