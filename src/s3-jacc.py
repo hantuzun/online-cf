@@ -1,8 +1,8 @@
 #! /usr/bin/env python3
+from __future__ import division
 import redis
 import re
 import time
-import math as m
 
 #r1 = redis.StrictRedis(host='localhost', port=6379, db=0)
 r2 = redis.StrictRedis(host='localhost', port=6380, db=0)
@@ -16,28 +16,28 @@ while True:
         item1 = pairReg.group(1)
         item2 = pairReg.group(2)
 
-        interCount = 0
-        unionCount = 0        
-
         keys1 = r2.hkeys(item1)
         keys2 = r2.hkeys(item2)
 
+        interCount = 0
+        unionCount = 0        
         for key in keys1:
-
             if r2.hexists(item2, key):
                 interCount += 1
                 unionCount += 1
             else:
                 unionCount += 1
         for key in keys2:
-            
             if r2.hexists(item1,key) != 1:
-                #interCount += 1
                 unionCount += 1
+
         if unionCount !=0:
             sim = interCount / unionCount
         else:
             sim = 0
+
+        print("similarity of ", item1, " and ", item2, " is ", sim)
+
         if r3.zcard(item1) > 30:
             print(r3.zremrangebyrank(item1,0,30))
         if r3.zcard(item2) > 30:
