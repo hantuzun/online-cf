@@ -1,8 +1,8 @@
 #! /usr/bin/env python3
+from __future__ import division # for float point division
 import redis
 import re
 import time
-import math as m
 
 #r1 = redis.StrictRedis(host='localhost', port=6379, db=0)
 r2 = redis.StrictRedis(host='localhost', port=6380, db=0)
@@ -10,44 +10,43 @@ r3 = redis.StrictRedis(host='localhost', port=6381, db=0)
 
 while True:
     if r3.llen('qii') != 0:
-        pair = str(r3.lpop('qii'))
+        pair = r3.lpop('qii').decode('utf-8')
         pairReg = re.match(r'(.*):(.*)', pair, re.M|re.I)
         
         item1 = pairReg.group(1)
         item2 = pairReg.group(2)
 
-        numerator = 0
-        denom1 = 0
-        denom2 = 0
-        
         keys1 = r2.hkeys(item1)
         keys2 = r2.hkeys(item2)
-        unionCount = 0
+
+        interCount = 0
+        unionCount = 0        
         for key in keys1:
-            denom1 += int(str(r2.hget(item1, key)))**2
             if r2.hexists(item2, key):
-                numerator += int(str(r2.hget(item1, key)))*int(str(r2.hget(item2, key)))
+                interCount += 1
                 unionCount += 1
             else:
-                numerator += int(str(r2.hget(item1, key)))*3
                 unionCount += 1
         for key in keys2:
-            denom2 += int(str(r2.hget(item2, key)))**2
             if r2.hexists(item1,key) != 1:
-                numerator += int(str(r2.hget(item2, key)))*3
                 unionCount += 1
 
-        missingCount1 = int(str(r2.get('userCount'))) - r2.hlen(item1)
-        missingCount2 = int(str(r2.get('userCount'))) - r2.hlen(item2)
+        if unionCount !=0:
+            sim = interCount / unionCount
+        else:
+            sim = 0
 
-        denom1 += missingCount1 * 9
-        denom2 += missingCount2 * 9
-        denom1 = m.sqrt(denom1)
-        denom2 = m.sqrt(denom2)
+        print ('similarity of ', item1, ' and ', item2, ' is ', sim)
 
-        denom = denom1 * denom2
+        if r3.zcard(item1) > 30:
+            print 'item1.zcard is greater than 30'
+            r3.zremrangebyrank(item1,0,30)
+        if r3.zcard(item2) > 30:
+            print 'item2.zcard is greater than 30'
+            r3.zremrangebyrank(item2,0,30)
 
-        sim = numerator / denom
-
-        r3.zadd(item1, item2, sim)
-        r3.zadd(item2, item1, sim)
+        r3.zadd(item1, sim, item2)
+        r3.zadd(item2, sim, item1)
+    else:
+        print ('Waiting...')
+        time.sleep(2)

@@ -25,7 +25,7 @@ Run the following python scripts in this order:
 # cd online-cf/src 
 
 python3 s1.py
-python3 client.py
 python3 s2.py
-python3 s3-jacc.py
+python3 s3.py
+python3 client.py
 ```
