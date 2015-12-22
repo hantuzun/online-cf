@@ -1,13 +1,15 @@
 # online-cf
 Real-time collaborative filtering for item-item similarities
 
-## Build Instructions 
-
-Scripts are written in Python 3.
-
+## Dependencies
 ```sh
 pip3 install redis
 ```
+
+## Instructions 
+Scripts are written in Python 3.
+Have your redis servers running before running the scripts.
+
 
 ## Latest Issues
 

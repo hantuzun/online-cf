@@ -13,7 +13,3 @@ with open('../data/new.csv', 'w') as csvwrite:
 	writer.writeheader()
 	for element in dictarr:
 		writer.writerow(element)
-
-
-
-

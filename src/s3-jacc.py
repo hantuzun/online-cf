@@ -3,11 +3,6 @@ import redis
 import re
 import time
 import math as m
-#I manually populated r1's list while I ran the script
-#Some notes: As queues I used Redis lists and for the 
-#adjancency matrix I used redis sets. Since Redis can
-#not iterate specific keys r2 must only contain sets
-#so that we can represent a matrix structure
 
 #r1 = redis.StrictRedis(host='localhost', port=6379, db=0)
 r2 = redis.StrictRedis(host='localhost', port=6380, db=0)
