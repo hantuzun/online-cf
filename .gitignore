@@ -1,5 +1,7 @@
+data/test.csv
 
-# Created by https://www.gitignore.io/api/osx,windows,linux,python,redis,sublimetext
+
+# The rest is created by https://www.gitignore.io/api/osx,windows,linux,python,redis,sublimetext
 
 ### OSX ###
 .DS_Store
