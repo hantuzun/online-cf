@@ -3,7 +3,7 @@ Real-time collaborative filtering for item-item similarities
 
 ## Dependencies
 ```sh
-pip3 install redis
+$ pip3 install redis
 ```
 
 ## Instructions 
@@ -13,19 +13,23 @@ Run the following redis servers running before running the scripts.
 ```sh
 # cd redis.../src
 
-redis-server --port 6379
-redis-server --port 6380
-redis-server --port 6381
-redis-server --port 6382
+$ redis-server --port 6379
+$ redis-server --port 6380
+$ redis-server --port 6381
+$ redis-server --port 6382
 ```
 
-Run the following python scripts in this order:
+Run the following python scripts via `run` script
 
 ```sh
-# cd online-cf/src 
+$ chmod +x run
+$ ./run
+```
 
-python3 s1.py
-python3 s2.py
-python3 s3.py
-python3 client.py
+Monitor the most similar items with `similars.py` script.
+ 
+```sh
+$ python3 similars.py 2
+Showing the most similar items for 2
+...
 ```
