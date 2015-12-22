@@ -3,7 +3,7 @@ import csv
 import socket               # Import socket module
 import time
 
-with open('../data/new.csv') as csvread:
+with open('../data/test.csv') as csvread:
 	reader = csv.DictReader(csvread)
 	for row in reader:
 		uId = row['userId']

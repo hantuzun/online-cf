@@ -24,8 +24,8 @@ while True:
 		item = pairReg.group(1)
 		user = pairReg.group(2)
 		rating = pairReg.group(3)
-		if r2.exists(user) != 1:
-			r2.incr('userCount')
+		if r4.exists(user) != 1:
+			r4.incr('userCount')
 		#print(item)
 		#print(user)
 		#test purposesbreak
