@@ -11,7 +11,7 @@ r4 = redis.StrictRedis(host='localhost', port=6382, db=0)
 while True:
 	#there must be a list named 'qiu' in r1 first 
 	if r1.llen('qiu') != 0:
-		pair = str(r1.lpop('qiu'), "utf-8")
+		pair = str(r1.lpop('qiu')).encode("utf-8")
 		
 		#Parse item and user names
 		pairReg = re.match(r'(.*):(.*):(.*)', pair, re.M|re.I)
@@ -30,7 +30,7 @@ while True:
 		#Check in all items for 'user'
 		members = r4.smembers(user)
 		while len(members) != 0:
-			citem = (str(members.pop(), 'utf-8'))
+			citem = str(members.pop()).encode("utf-8")
 			if citem != item:
 				itemUser = item + ':' + citem
 				print(itemUser)
