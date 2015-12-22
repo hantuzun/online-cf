@@ -10,13 +10,20 @@ pip3 install redis
 Scripts are written in Python 3.
 Have your redis servers running before running the scripts.
 
+```sh
+# cd redis
 
-## Latest Issues
+make
+src/redis-server --port 6379
+```
 
- - Not sure about the cosine similarity calculation. it needs testing with a smaller and more controllable dataset.
+Run the following python scripts at the same time:
 
- - You must install and configure redis on your locals. Feel free with changing the ports on each script.
+```sh
+# cd online-cf/src 
 
- - The test run is like this: fire up s1.py, client.py, s2.py and s3.py in order for best tests.
-
- - s2.py fails at some point because of something related with redis functions sadd and hset (I think it's a minor issue).
+python3 s1.py
+python3 client.py
+python3 s2.py
+python3 s3-jacc.py
+```
