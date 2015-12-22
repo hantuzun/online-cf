@@ -14,7 +14,7 @@ actions = [{'userId': 1, 'movieId': 1, 'rating': 1},
            {'userId': 8, 'movieId': 2, 'rating': 1}]
 
 with open('../data/test.csv', 'w') as csvwrite:
-	fieldnames = ['userId', 'movieId', 'rating']
-	writer = csv.DictWriter(csvwrite, fieldnames=fieldnames)
-	writer.writeheader()
-	writer.writerows(actions)
+    fieldnames = ['userId', 'movieId', 'rating']
+    writer = csv.DictWriter(csvwrite, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(actions)
