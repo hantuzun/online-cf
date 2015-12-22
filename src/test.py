@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 import csv
 
-ratings = [{'userId': 1, 'movieId': 1, 'rating': 1},
+actions = [{'userId': 1, 'movieId': 1, 'rating': 1},
            {'userId': 2, 'movieId': 1, 'rating': 1},
            {'userId': 3, 'movieId': 1, 'rating': 1},
            {'userId': 4, 'movieId': 1, 'rating': 1},
@@ -17,4 +17,4 @@ with open('../data/test.csv', 'w') as csvwrite:
 	fieldnames = ['userId', 'movieId', 'rating']
 	writer = csv.DictWriter(csvwrite, fieldnames=fieldnames)
 	writer.writeheader()
-	writer.writerows(ratings)
+	writer.writerows(actions)
