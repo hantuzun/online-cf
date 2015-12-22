@@ -9,7 +9,7 @@ r3 = redis.StrictRedis(host='localhost', port=6381, db=0)
 
 while True:
     if r3.llen('qii') != 0:
-        pair = r3.lpop('qii').decode('utf-8')
+        pair = r3.blpop('qii')[1].decode("utf-8")
         pairReg = re.match(r'(.*):(.*)', pair, re.M|re.I)
         
         item1 = pairReg.group(1)
@@ -38,8 +38,8 @@ while True:
 
         print ('The similarity of', item1, 'and', item2, 'is', sim)
 
-        r3.zadd(item1, sim, item2)
-        r3.zadd(item2, sim, item1)
+        r3.zadd(item1, -sim, item2)
+        r3.zadd(item2, -sim, item1)
 
         maxSize = 10;
 

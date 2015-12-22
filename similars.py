@@ -12,6 +12,6 @@ print('Showing the most similar items for', item)
 r3 = redis.StrictRedis(host='localhost', port=6381, db=0)
 
 while True:
-    similars = r3.zrange(item, 0, -1, desc=True, withscores=True)
-    print (similars)
+    similars = r3.zrange(item, 0, -1, desc=False, withscores=True)
+    print (list(map(lambda e: [e[0].decode('utf-8'), "{:.3f}".format(-e[1])], similars)))
     time.sleep(1)

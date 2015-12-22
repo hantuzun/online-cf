@@ -11,7 +11,9 @@ r4 = redis.StrictRedis(host='localhost', port=6382, db=0)
 while True:
     #There must be a list named 'qiu' in r1 first 
     if r1.llen('qiu') != 0:
-        pair = r1.lpop('qiu').decode("utf-8")
+        pair = r1.blpop('qiu')
+        print ('pair is', pair[1].decode("utf-8"))
+        pair = pair[1].decode("utf-8")
 
         # Parse item and user names
         # item:user:rating
