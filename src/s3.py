@@ -36,12 +36,12 @@ while True:
         else:
             sim = 0
 
-        print ('similarity of', item1, 'and', item2, 'is', sim)
+        print ('The similarity of', item1, 'and', item2, 'is', sim)
 
         r3.zadd(item1, sim, item2)
         r3.zadd(item2, sim, item1)
 
-        maxSize = 2;
+        maxSize = 10;
 
         # Remove least similar items if similar item set size is larger than maxSize
         for item in [item1, item2]:
