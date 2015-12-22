@@ -10,22 +10,20 @@ r3 = redis.StrictRedis(host='localhost', port=6381, db=0)
 
 while True:
     if r3.llen('qii') != 0:
-        pair = str(r3.lpop('qii'), "utf-8")
+        pair = str(r3.lpop('qii'))
         pairReg = re.match(r'(.*):(.*)', pair, re.M|re.I)
         
         item1 = pairReg.group(1)
         item2 = pairReg.group(2)
 
-        
         interCount = 0
-        unionCount = 0
-        
-        
+        unionCount = 0        
+
         keys1 = r2.hkeys(item1)
         keys2 = r2.hkeys(item2)
 
         for key in keys1:
-            
+
             if r2.hexists(item2, key):
                 interCount += 1
                 unionCount += 1
