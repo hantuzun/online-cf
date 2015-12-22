@@ -38,15 +38,17 @@ while True:
 
         print ('similarity of ', item1, ' and ', item2, ' is ', sim)
 
-        if r3.zcard(item1) > 30:
-            print ('item1.zcard is greater than 30')
-            r3.zremrangebyrank(item1,0,30)
-        if r3.zcard(item2) > 30:
-            print ('item2.zcard is greater than 30')
-            r3.zremrangebyrank(item2,0,30)
-
         r3.zadd(item1, sim, item2)
         r3.zadd(item2, sim, item1)
+
+        maxSize = 2;
+
+        for item in [item1, item2]:
+            size = r3.zcard(item)
+            removeCount = size - maxSize
+            if removeCount > 0:
+                r3.zremrangebyrank(item, 0, removeCount - 1)
+
     else:
         print ('Waiting...')
         time.sleep(2)
