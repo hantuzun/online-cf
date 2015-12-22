@@ -3,6 +3,15 @@
 python3 src/s1.py &
 python3 src/s2.py &
 python3 src/s3.py &
+python3 src/s3.py &
+python3 src/s3.py &
+python3 src/s3.py &
+python3 src/s3.py &
+python3 src/s3.py &
+python3 src/s3.py &
+python3 src/s3.py &
+python3 src/s3.py &
+python3 src/s3.py &
 
 # wait
 cat
