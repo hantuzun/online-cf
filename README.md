@@ -8,16 +8,18 @@ pip3 install redis
 
 ## Instructions 
 Scripts are written in Python 3.
-Have your redis servers running before running the scripts.
+Run the following redis servers running before running the scripts.
 
 ```sh
-# cd redis
+# cd redis.../src
 
-make
-src/redis-server --port 6379
+redis-server --port 6379
+redis-server --port 6380
+redis-server --port 6381
+redis-server --port 6382
 ```
 
-Run the following python scripts at the same time:
+Run the following python scripts in this order:
 
 ```sh
 # cd online-cf/src 
